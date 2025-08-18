@@ -1,8 +1,10 @@
+USE db_240410107114;
+
 SELECT * FROM deposit;
 SELECT * FROM branch;
 SELECT * FROM borrow;
 SELECT * FROM customers;
 SELECT act_no,amount FROM deposit;
 SELECT c_name FROM deposit WHERE amount > 4000;
-SELECT c_name FROM deposit WHERE a_date > '1-12-95';
-DESC customers;
+SELECT c_name FROM deposit WHERE a_date > '1995-12-01';
+DESC customers
