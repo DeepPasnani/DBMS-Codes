@@ -1,3 +1,9 @@
+USE db_240410107114;
+DROP Table IF EXISTS deposit;
+DROP Table IF EXISTS branch;
+DROP Table IF EXISTS borrow;
+DROP Table IF EXISTS customers;
+
 CREATE TABLE deposit
 (
 act_no VARCHAR (5),
@@ -8,19 +14,19 @@ a_date DATE
 );
 
 INSERT INTO deposit
-VALUES ( '101', 'Sunil', 'AJNI', '5000', '4-JAN-96' );
+VALUES ( '101', 'Sunil', 'AJNI', '5000', '1996-01-01' );
 INSERT INTO deposit
-VALUES ( '102', 'Mehul', 'Karolbaugh', '3500', '17-NOV-95' );
+VALUES ( '102', 'Mehul', 'KAROLBAUG', '3500', '1995-11-17' );
 INSERT INTO deposit
-VALUES ( '105' ,'PRMOD' ,'M.G.ROAD' ,'3000.00' , '27-MAR-96' );
+VALUES ( '105' ,'PRMOD' ,'M.G.ROAD' ,'3000.00' , '1996-01-27' );
 INSERT INTO deposit
-VALUES ( '106', 'SANDIP ANDHERI', '2000.00', '31-MAR-96' );
+VALUES ( '106', 'SANDIP', 'ANDHERI', '2000.00', '1996-01-31' );
 INSERT INTO deposit
-VALUES ( '107', 'SHIVANI', 'VIRAR', '1000.00', '5-SEP-95' );
+VALUES ( '107', 'SHIVANI', 'VIRAR', '1000.00', '1995-09-05' );
 INSERT INTO deposit
-VALUES ( '108', 'KRANTI', 'NEHRU PLACE', '5000.00', '2-JUL-95');
+VALUES ( '108', 'KRANTI', 'NEHRU PLACE', '5000.00', '1995-07-02');
 INSERT INTO deposit
-VALUES ( '109', 'MINU', 'POWAI', '7000.00', '10-AUG-95');
+VALUES ( '109', 'MINU', 'POWAI', '7000.00', '1995-08-10');
 
 
 
@@ -32,25 +38,25 @@ CREATE TABLE branch
  b_name VARCHAR (18)
 );
 
-INSERT INTO deposit
+INSERT INTO branch
 VALUES ( 'VRCE', 'NAGPUR');
-INSERT INTO deposit
+INSERT INTO branch
 VALUES ( 'AJNI', 'NAGPUR');
-INSERT INTO deposit
+INSERT INTO branch
 VALUES ( 'KAROLBAGH', 'DELHI');
-INSERT INTO deposit
+INSERT INTO branch
 VALUES ( 'CHANDI', 'DELHI');
-INSERT INTO deposit
+INSERT INTO branch
 VALUES ( 'DHARAMPETH', 'NAGPUR');
-INSERT INTO deposit
+INSERT INTO branch
 VALUES ( 'M.G.ROAD', 'BANGLORE');
-INSERT INTO deposit
+INSERT INTO branch
 VALUES ( 'ANDHERI', 'BOMBAY');
-INSERT INTO deposit
+INSERT INTO branch
 VALUES ( 'VIRAR', 'BOMBAY');
-INSERT INTO deposit
+INSERT INTO branch
 VALUES ( 'NEHRU PLACE', 'DELHI');
-INSERT INTO deposit
+INSERT INTO branch
 VALUES ( 'POWAI', 'BOMBAY');
 
 
@@ -63,26 +69,26 @@ CREATE TABLE customers
  c_name VARCHAR (19)
 );
 
-INSERT INTO deposit
+INSERT INTO customers
 VALUES ( 'ANIL', 'CALCUTTA');
-INSERT INTO deposit
+INSERT INTO customers
 VALUES ( 'SUNIL', 'DELHI');
-INSERT INTO deposit
+INSERT INTO customers
 VALUES ( 'MEHUL', 'BARODA');
-INSERT INTO deposit
-                                    VALUES ( 'MANDAR', 'PATNA');
-                                    INSERT INTO deposit
-                                    VALUES ( 'MADHURI', 'NAGPUR');
-                                    INSERT INTO deposit
-                                    VALUES ( 'PRAMOD', 'NAGPUR');
-                                    INSERT INTO deposit
-                                    VALUES ( 'SANDIP', 'SURAT');
-                                    INSERT INTO deposit
-                                    VALUES ( 'SHIVANI', 'BOMBAY');
-                                    INSERT INTO deposit
-                                    VALUES ( 'KRANTI', 'BOMBAY');
-                                    INSERT INTO deposit
-                                    VALUES ( 'NAREN', 'BOMBAY');
+INSERT INTO customers
+VALUES ( 'MANDAR', 'PATNA');
+INSERT INTO customers
+VALUES ( 'MADHURI', 'NAGPUR');
+INSERT INTO customers
+VALUES ( 'PRAMOD', 'NAGPUR');
+INSERT INTO customers
+VALUES ( 'SANDIP', 'SURAT');
+INSERT INTO customers
+VALUES ( 'SHIVANI', 'BOMBAY');
+INSERT INTO customers
+VALUES ( 'KRANTI', 'BOMBAY');
+INSERT INTO customers
+VALUES ( 'NAREN', 'BOMBAY');
 
 
 
@@ -96,18 +102,18 @@ b_name VARCHAR(18),
 amount NUMERIC (8,2)
 ); 
 
-INSERT INTO deposit
+INSERT INTO borrow
 VALUES ( '201', 'ANIL', 'VRCE', '1000.00');
-INSERT INTO deposit
+INSERT INTO borrow
 VALUES ( '206', 'MEHUL', 'AJNI', '5000.00');
-INSERT INTO deposit
+INSERT INTO borrow
 VALUES ( '311', 'SUNIL', 'DHARAMPETH', '3000.00');
-INSERT INTO deposit
+INSERT INTO borrow
 VALUES ( '321', 'MADHURI', 'ANDHERI', '2000.00');
-INSERT INTO deposit
+INSERT INTO borrow
 VALUES ( '375', 'PRAMOD', 'VIRAR', '8000.00');
-INSERT INTO deposit
-VALUES ( '481', 'KRANTI', 'NEHRU PLACE',
+INSERT INTO borrow
+VALUES ( '481', 'KRANTI', 'NEHRU PLACE','3000.00');
 
 
 
@@ -116,4 +122,3 @@ DESC deposit;
 DESC branch;
 DESC borrow;
 DESC customers;
-
