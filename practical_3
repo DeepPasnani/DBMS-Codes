@@ -1,73 +1,114 @@
-CREATE TABLE Emp
-(
-    Empno INT PRIMARY KEY,
-    deptno INT FOREIGN KEY,
-    name VARCHAR(20),
-    role VARCHAR(20),
-    reole_id INT,
-    hire_date DATE,
-    manager_no INT,
-);
+USE db_240410107114;
 
-INSERT INTO Emp
-VALUES ('101', '20', 'Ward', 'Salesman', '7697', '02-22-1995', '102');
-INSERT INTO Emp
-VALUES ('102', '20', 'Jones', 'Manager', '7839', '06-15-1990', '');
-INSERT INTO Emp
-VALUES ('103', '20', 'Martin', 'Salesman', '7697', '04-23-1993', '102');
-INSERT INTO Emp
-VALUES ('104', '40', 'Blake', 'Manager', '7839', '05-01-1992', '');
-INSERT INTO Emp
-VALUES ('105', '10', 'Clark', 'Manager', '7839', '02-10-1995', '103');
-INSERT INTO Emp
-VALUES ('106', '10', 'Scott', 'Analyst', '7565', '12-09-1991', '105');
-INSERT INTO Emp
-VALUES ('107', '30', 'King', 'President', '7000', '01-17-1994', '');
-
-
-
-CREATE TABLE deptno
-(
-    deptno INT PRIMARY KEY,
-    dept_name VARCHAR(20),
-    job_id VARCHAR(20),
-    dept_loc VARCHAR(20) FOREIGN KEY,
-)
-
-INSERT INTO deptno
-VALUES ('10', 'Account', 'IT_PROG', 'New York');
-INSERT INTO deptno
-VALUES ('20', 'Research', 'MK_MGR', 'Delhi');
-INSERT INTO deptno
-VALUES ('30', 'Sales', 'F1_MGR', 'Chicago');
-INSERT INTO deptno
-VALUES ('40', 'Operations', 'F1_ACC', 'Los Angeles');
-
-
-
+DROP TABLE IF EXISTS emp;
+DROP TABLE IF EXISTS job;
+DROP TABLE IF EXISTS deptno;
 
 CREATE TABLE job
 (
-    dept_loc VARCHAR(20) PRIMARY KEY,
+    job_id VARCHAR(20) PRIMARY KEY,
     job_name VARCHAR(20),
     min_sal INT,
     max_sal INT
 );
 
 INSERT INTO job
-VALUES ('IT_PROG', 'Programmer', '', '4000');
+VALUES ('IT_PROG', 'Programmer', NULL, '4000');
 INSERT INTO job
 VALUES ('MK_MGR', 'Marketing Manager', '9000', '15000');
 INSERT INTO job
 VALUES ('F1_MGR', 'Finance Manager', '8200', '12000');
 INSERT INTO job
-VALUES ('F1_ACC', 'Accountant', '', '4200');
+VALUES ('F1_ACC', 'Accountant', NULL, '4200');
 INSERT INTO job
-VALUES ('LEC', 'Lecturer', '', '6000');
+VALUES ('LEC', 'Lecturer', NULL, '6000');
 INSERT INTO job
 VALUES ('COMP_OP', 'Computer Operator', '1500', '3000');
 
 
 
 
-ADD COLUMN emp_address VARCHAR(100);
+CREATE TABLE dept
+(
+    deptno INT,
+    dept_name VARCHAR(20),
+    Job_id VARCHAR(20),
+    dept_loc VARCHAR(20),
+    PRIMARY KEY (deptno),
+    FOREIGN KEY (Job_id) REFERENCES job(job_id)
+);
+
+INSERT INTO dept
+VALUES ('10', 'Account', 'IT_PROG', 'New York');
+INSERT INTO dept
+VALUES ('20', 'Research', 'MK_MGR', 'Delhi');
+INSERT INTO dept
+VALUES ('30', 'Sales', 'F1_MGR', 'Chicago');
+INSERT INTO dept
+VALUES ('40', 'Operations', 'F1_ACC', 'Los Angeles');
+
+
+
+
+CREATE TABLE emp
+(
+    Empno INT,
+    deptno INT,
+    name VARCHAR(20),
+    role VARCHAR(20),
+    reole_id INT,
+    hire_date DATE,
+    manager_no INT,
+    PRIMARY KEY (Empno),
+    FOREIGN KEY (deptno) REFERENCES dept(deptno)
+);
+
+INSERT INTO emp
+VALUES ('101', '20', 'Ward', 'Salesman', '7697', '1995-02-22', '102');
+INSERT INTO emp
+VALUES ('102', '20', 'Jones', 'Manager', '7839', '1990-06-15', NULL);
+INSERT INTO emp
+VALUES ('103', '20', 'Martin', 'Salesman', '7697', '1993-04-23', '102');
+INSERT INTO emp
+VALUES ('104', '40', 'Blake', 'Manager', '7839', '1992-05-01', NULL);
+INSERT INTO emp
+VALUES ('105', '10', 'Clark', 'Manager', '7839', '1995-02-10', '103');
+INSERT INTO emp
+VALUES ('106', '10', 'Scott', 'Analyst', '7565', '1991-12-09', '105');
+INSERT INTO emp
+VALUES ('107', '30', 'King', 'President', '7000', '1994-01-17', NULL);
+
+
+
+
+ALTER TABLE emp
+ADD emp_address VARCHAR(100);
+
+ALTER TABLE emp
+DROP emp_address;
+
+ALTER TABLE deposit
+MODIFY act_no CHAR(5);
+
+UPDATE job
+SET min_sal = '5000.00'
+WHERE min_sal = NULL;
+
+SELECT act_no, amount
+FROM deposit
+WHERE a_date BETWEEN '1995-01-01' AND '1996-08-31';
+
+SELECT job_name
+FROM job
+WHERE min_sal > '4000.00';
+
+SELECT name AS name, job.max_sal AS max_salary, job.min_sal AS min_salary
+FROM emp
+JOIN dept ON emp.deptno = dept.deptno
+JOIN job ON dept.Job_id = job.job_id
+WHERE emp.deptno = 20; 
+
+SELECT Empno, name, dept.deptno, dept.dept_name, dept.dept_loc
+FROM emp
+JOIN dept ON emp.deptno = dept.deptno
+WHERE emp.deptno IN (10, 20);
