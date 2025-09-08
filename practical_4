@@ -1,0 +1,28 @@
+USE db_240410107114;
+
+
+SELECT *
+FROM emp
+WHERE name LIKE 'A_a%';
+
+
+SELECT name, Empno, job.max_sal AS max_salary, job.min_sal AS min_salary
+FROM emp
+JOIN dept ON emp.deptno = dept.deptno
+JOIN job ON dept.Job_id = job.job_id
+WHERE name LIKE 'Ani__';
+
+
+SELECT *
+FROM emp
+WHERE manager_no IS NOT NULL AND name LIKE '%n_%';
+
+
+SELECT *
+FROM emp
+WHERE manager_no IS NULL AND name LIKE '%___a%';
+
+
+SELECT *
+FROM emp
+WHERE name LIKE '%\_%' ESCAPE '\';
